@@ -1,5 +1,11 @@
+
 (function() {
     'use strict';
+    var date = document.querySelector('#date');
+    if (null !== date) {
+        date.value = getCurrentDate();
+        document.querySelector('#paid_by').value = document.querySelector('#user_id').value;
+    }
 })();
 
 function addExpense() {
@@ -38,3 +44,23 @@ function serialize(form_id) {
     });
     return response;
 }
+
+function getCurrentDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd<10) {
+        dd='0'+dd;
+    }
+
+    if (mm<10) {
+        mm='0'+mm;
+    }
+
+    today = yyyy+'-'+mm+'-'+dd;
+    return today;
+}
+
+

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\User;
+use App\Expense;
 
 class Controller extends BaseController
 {
@@ -21,13 +22,30 @@ class Controller extends BaseController
     public function index()
     {
         $users = User::all();
+        $expenses = Expense::all();
         $data['users'] = $users;
+        $data['expenses'] = $expenses;
         return view('home', $data);
     }
 
     public function addExpense()
     {
-        echo \Request::input('expense');
+        $expense = new Expense();
+        $expense->name = \Request::input('name');
+        $expense->amount = \Request::input('amount');
+        $date = \Request::input('date');
+        $date = str_replace('/', '-', $date);
+        $date = date('Y-m-d', strtotime($date));
+        $expense->date = $date;
+        $expense->paid_by = \Request::input('paid_by');
+        $expense->created_by = \Auth::user()->id;
+        $expense->modified_by = \Auth::user()->id;
+        try {
+            $expense->save();
+            return \Response::json('');
+        } catch (\Exception $e) {
+            return \Response::json($e->getMessage());
+        }
     }
 
 }

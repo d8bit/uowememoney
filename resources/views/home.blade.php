@@ -9,10 +9,10 @@
 
                 <div class="panel-body">
                     <form id="add_expense_form" action="http://localhost/uownmemoneyhoney/laravel/public/addExpense" method="post" onsubmit="return addExpense();">
-                        <label for="expense">Expense</label>
-                        <input type="text" id="expense" name="expense" value="expense 1"><br />
+                        <label for="name">Expense</label>
+                        <input type="text" id="name" name="name" value="expense 1"><br />
                         <label for="amount">Amount</label>
-                        <input type="text" id="amount" name="amount" value="1234"><br />
+                        <input type="text" id="amount" name="amount" value="12.5"><br />
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date"><br />
                         <label for="paid_by">Paid by</label>
@@ -22,8 +22,22 @@
                             @endforeach
                         </select><br />
                         {{ csrf_field() }}
+                        <input type="hidden" id="user_id" name="user_id" value="{{\Auth::user()->id}}">
                         <input type="submit" value="Add">
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Expenses</div>
+
+                <div class="panel-body">
+                    @foreach ($expenses as $expense)
+                        <p>{{$expense->name}}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
