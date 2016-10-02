@@ -16,6 +16,7 @@ function addExpense() {
                 alert(response);
             } else {
                 listExpenses();
+                setTotal();
             }
         }
     };
@@ -101,6 +102,7 @@ function deleteExpense(expense_id) {
                     alert(reponse);
                 } else {
                     listExpenses();
+                    setTotal();
                 }
             }
         };
@@ -109,6 +111,23 @@ function deleteExpense(expense_id) {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send();
     }
+}
+
+function setTotal() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if ('' !== this.responseText) {
+                let total = JSON.parse(this.responseText);
+                let html = total.user + " => " + total.amount+" €";
+                document.querySelector('#total').innerHTML = html;
+            }
+        }
+    };
+
+    xhttp.open("GET", "total", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
 }
 
 function formatDate(date) {
@@ -132,3 +151,4 @@ function setDate() {
 
 
 listExpenses();
+setTotal();

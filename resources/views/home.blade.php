@@ -34,8 +34,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Expenses</div>
 
-                <div id="expenses" class="panel-body">
-                </div>
+                <div id="expenses" class="panel-body"></div>
+                <div id="total" class="panel-body"></div>
             </div>
         </div>
     </div>

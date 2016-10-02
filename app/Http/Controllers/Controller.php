@@ -92,4 +92,10 @@ class Controller extends BaseController
         }
     }
 
+    public function total()
+    {
+        $result = Expense::total();
+        return \Response::json($result);
+    }
+
 }
