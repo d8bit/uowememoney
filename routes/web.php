@@ -15,5 +15,6 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'Controller@index');
+    Route::get('/expenses/{id}', 'Controller@expenses');
     Route::post('/addExpense', 'Controller@addExpense');
 });

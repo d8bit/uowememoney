@@ -51,16 +51,32 @@ function getCurrentDate() {
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
 
-    if (dd<10) {
+    if (dd < 10) {
         dd='0'+dd;
     }
 
-    if (mm<10) {
+    if (mm < 10) {
         mm='0'+mm;
     }
 
     today = yyyy+'-'+mm+'-'+dd;
     return today;
+}
+
+function expenses() {
+    let user_id = document.querySelector('#user_id').value;
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if ('' !== this.responseText) {
+                console.log('response: ', this.responseText);
+            }
+        }
+    };
+
+    xhttp.open("GET", "expenses/" + user_id, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
 }
 
 

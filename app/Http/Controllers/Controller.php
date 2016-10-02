@@ -48,4 +48,37 @@ class Controller extends BaseController
         }
     }
 
+    public function editExpense($expense_id)
+    {
+        try {
+            $expense = Expense::findOrFail($expense_id);
+        } catch (\Exception $e) {
+            return \Response::json($e->getMessage());
+        }
+        $expense->name = \Request::input('name');
+        $expense->amount = \Request::input('amount');
+        $date = \Request::input('date');
+        $date = str_replace('/', '-', $date);
+        $date = date('Y-m-d', strtotime($date));
+        $expense->date = $date;
+        $expense->paid_by = \Request::input('paid_by');
+        $expense->modified_by = \Auth::user()->id;
+        try {
+            $expense->save();
+            return \Response::json('');
+        } catch (\Exception $e) {
+            return \Response::json($e->getMessage());
+        }
+    }
+
+    public function expenses($user_id = null)
+    {
+        if (is_null($user_id)) {
+            $expenses = Expense::all();
+        } else {
+            $expenses = Expense::where('paid_by', '=', $user_id)->get();
+        }
+        return \Response::json($expenses);
+    }
+
 }
