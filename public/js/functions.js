@@ -119,7 +119,7 @@ function setTotal() {
         if (this.readyState == 4 && this.status == 200) {
             if ('' !== this.responseText) {
                 let total = JSON.parse(this.responseText);
-                let html = total.user + " => " + total.amount+" €";
+                let html = total.user + " has a debt of " + total.amount+" €";
                 document.querySelector('#total').innerHTML = html;
             }
         }
