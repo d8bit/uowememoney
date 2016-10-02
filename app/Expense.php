@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
-    //
+    public function paid_by()
+    {
+        return $this->hasOne('App\User', 'id', 'paid_by');
+    }
 }

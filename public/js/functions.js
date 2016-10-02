@@ -75,7 +75,8 @@ function listExpenses() {
             if ('' !== this.responseText) {
                 let expenses_list = JSON.parse(this.responseText);
                 expenses_list.forEach(function (element) {
-                    html += '<div class="col-md-10">'+element.name+'</div><div class="col-md-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div>';
+                    let date = formatDate(element.date);
+                    html += '<div class="col-md-12 expense"><div class="col-md-10">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')</div><div class="col-md-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
                 });
                 document.querySelector('#expenses').innerHTML = html;
             }
@@ -106,6 +107,11 @@ function deleteExpense(expense_id) {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send();
     }
+}
+
+function formatDate(date) {
+    let my_date = new Date(date);
+    return my_date.getDate()+'/'+my_date.getMonth()+'/'+my_date.getFullYear();
 }
 
 

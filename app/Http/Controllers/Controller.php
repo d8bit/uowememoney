@@ -71,10 +71,12 @@ class Controller extends BaseController
 
     public function expenses($user_id = null)
     {
+        // TODO: remove use_id = null
+        $user_id = null;
         if (is_null($user_id)) {
-            $expenses = Expense::all();
+            $expenses = Expense::with('paid_by')->get();
         } else {
-            $expenses = Expense::where('paid_by', '=', $user_id)->get();
+            $expenses = Expense::where('paid_by', '=', $user_id)->with('paid_by')->get();
         }
         return \Response::json($expenses);
     }
