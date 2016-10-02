@@ -17,6 +17,9 @@ select {
 .expense {
     margin-top: 5px;
     margin-bottom: 5px;
+    border-bottom: 1px solid #000;
+    padding-top: 10px;
+    padding-bottom: 18px;
 }
 
 .deleteButton {

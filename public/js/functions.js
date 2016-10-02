@@ -31,7 +31,6 @@ function addExpense() {
 function resetForm() {
     document.querySelector('#add_expense_form').reset();
     setDate();
-    document.querySelector('#name').focus();
 }
 
 function serialize(form_id) {
@@ -79,7 +78,7 @@ function listExpenses() {
                 let expenses_list = JSON.parse(this.responseText);
                 expenses_list.forEach(function (element) {
                     let date = formatDate(element.date);
-                    html += '<div class="col-md-12 expense"><div class="col-md-10">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')</div><div class="col-md-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
+                    html += '<div class="col-xs-12 expense"><div class="col-xs-9">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')</div><div class="col-xs-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
                 });
                 document.querySelector('#expenses').innerHTML = html;
             }
@@ -113,7 +112,13 @@ function deleteExpense(expense_id) {
 }
 
 function formatDate(date) {
-    let my_date = new Date(date);
+
+    var t = date.split(/[- :]/);
+
+    // Apply each element to the Date function
+    var my_date = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+
+    // let my_date = new Date(date);
     return my_date.getDate()+'/'+my_date.getMonth()+'/'+my_date.getFullYear();
 }
 
