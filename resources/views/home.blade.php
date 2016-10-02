@@ -34,10 +34,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Expenses</div>
 
-                <div class="panel-body">
-                    @foreach ($expenses as $expense)
-                        <p>{{$expense->name}}</p>
-                    @endforeach
+                <div id="expenses" class="panel-body">
                 </div>
             </div>
         </div>

@@ -15,8 +15,11 @@ function addExpense() {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            if ('' !== this.responseText) {
-                console.log('response: ', this.responseText);
+            let response = JSON.parse(this.responseText);
+            if ('' !== response.trim()) {
+                alert(response);
+            } else {
+                listExpenses();
             }
         }
     };
@@ -63,13 +66,18 @@ function getCurrentDate() {
     return today;
 }
 
-function expenses() {
+function listExpenses() {
+    let html = '';
     let user_id = document.querySelector('#user_id').value;
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if ('' !== this.responseText) {
-                console.log('response: ', this.responseText);
+                let expenses_list = JSON.parse(this.responseText);
+                expenses_list.forEach(function (element) {
+                    html += '<div class="col-md-10">'+element.name+'</div><div class="col-md-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div>';
+                });
+                document.querySelector('#expenses').innerHTML = html;
             }
         }
     };
@@ -79,4 +87,26 @@ function expenses() {
     xhttp.send();
 }
 
+function deleteExpense(expense_id) {
+    var r = confirm("Are you shure?");
+    if (r === true) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(this.responseText);
+                if ('' !== response.trim()) {
+                    alert(reponse);
+                } else {
+                    listExpenses();
+                }
+            }
+        };
 
+        xhttp.open("GET", "deleteExpense/" + expense_id, true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send();
+    }
+}
+
+
+listExpenses();

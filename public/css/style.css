@@ -13,3 +13,9 @@ input[type=submit] {
 select {
     width: 150px;
 }
+
+.deleteButton {
+    cursor: pointer;
+    border: 1px solid #000;
+    text-align: center;
+}

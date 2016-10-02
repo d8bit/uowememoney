@@ -22,9 +22,7 @@ class Controller extends BaseController
     public function index()
     {
         $users = User::all();
-        $expenses = Expense::all();
         $data['users'] = $users;
-        $data['expenses'] = $expenses;
         return view('home', $data);
     }
 
@@ -79,6 +77,17 @@ class Controller extends BaseController
             $expenses = Expense::where('paid_by', '=', $user_id)->get();
         }
         return \Response::json($expenses);
+    }
+
+    public function deleteExpense($expense_id)
+    {
+        try {
+            $expense = Expense::findOrFail($expense_id);
+            $expense->delete();
+            return \Response::json('');
+        } catch (\Exception $e) {
+            return \Response::json($e->getMessage());
+        }
     }
 
 }
