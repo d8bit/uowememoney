@@ -1,11 +1,7 @@
 
 (function() {
     'use strict';
-    var date = document.querySelector('#date');
-    if (null !== date) {
-        date.value = getCurrentDate();
-        document.querySelector('#paid_by').value = document.querySelector('#user_id').value;
-    }
+    resetForm();
 })();
 
 function addExpense() {
@@ -27,8 +23,15 @@ function addExpense() {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(data);
 
-    document.querySelector('#add_expense_form').reset();
+    resetForm();
+
     return false;
+}
+
+function resetForm() {
+    document.querySelector('#add_expense_form').reset();
+    setDate();
+    document.querySelector('#name').focus();
 }
 
 function serialize(form_id) {
@@ -112,6 +115,14 @@ function deleteExpense(expense_id) {
 function formatDate(date) {
     let my_date = new Date(date);
     return my_date.getDate()+'/'+my_date.getMonth()+'/'+my_date.getFullYear();
+}
+
+function setDate() {
+    var date = document.querySelector('#date');
+    if (null !== date) {
+        date.value = getCurrentDate();
+        document.querySelector('#paid_by').value = document.querySelector('#user_id').value;
+    }
 }
 
 

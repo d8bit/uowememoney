@@ -10,9 +10,9 @@
                 <div class="panel-body">
                     <form id="add_expense_form" action="http://localhost/uownmemoneyhoney/laravel/public/addExpense" method="post" onsubmit="return addExpense();">
                         <label for="name">Expense</label>
-                        <input type="text" id="name" name="name" value="expense 1"><br />
+                        <input type="text" id="name" name="name" value=""><br />
                         <label for="amount">Amount</label>
-                        <input type="text" id="amount" name="amount" value="12.5"><br />
+                        <input type="number" step="0.01" id="amount" name="amount" value=""><br />
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date"><br />
                         <label for="paid_by">Paid by</label>
