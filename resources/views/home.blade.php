@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Add expensee</div>
+                <div class="panel-heading">Add expense</div>
 
                 <div class="panel-body">
                     <form id="add_expense_form" action="http://localhost/uownmemoneyhoney/laravel/public/addExpense" method="post" onsubmit="return addExpense();">
