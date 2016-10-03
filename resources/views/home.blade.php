@@ -23,7 +23,7 @@
                         </select><br />
                         {{ csrf_field() }}
                         <input type="hidden" id="user_id" name="user_id" value="{{\Auth::user()->id}}">
-                        <input type="submit" value="Add">
+                        <input type="submit" value="Add new expense">
                     </form>
                 </div>
             </div>
