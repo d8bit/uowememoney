@@ -1,2 +1,3 @@
-# uownmemoney
-App for couple expenses. Beta version.
+# YouOwnMeMoney Honey
+
+App to manage couple expenses. Alpha version.
