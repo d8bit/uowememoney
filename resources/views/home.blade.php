@@ -21,6 +21,8 @@
                                 <option value="{{$user->id}}">{{$user->name}}</option>
                             @endforeach
                         </select><br />
+                        <label for="shared">Shared</label>
+                        <input type="checkbox" id="shared" name="shared" checked><br />
                         {{ csrf_field() }}
                         <input type="hidden" id="user_id" name="user_id" value="{{\Auth::user()->id}}">
                         <input type="submit" value="Add new expense">

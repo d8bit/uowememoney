@@ -36,6 +36,10 @@ class Controller extends BaseController
         $date = date('Y-m-d', strtotime($date));
         $expense->date = $date;
         $expense->paid_by = \Request::input('paid_by');
+        $expense->shared = 0;
+        if (\Request::has('shared')) {
+            $expense->shared = 1;
+        }
         $expense->created_by = \Auth::user()->id;
         $expense->modified_by = \Auth::user()->id;
         try {

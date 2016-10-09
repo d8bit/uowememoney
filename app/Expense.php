@@ -18,7 +18,16 @@ class Expense extends Model
         $users = User::all();
         $expenses = [];
         foreach ($users as $user) {
-            $expenses[$user->name] = self::where('paid_by', '=', $user->id)->sum('amount');
+            // $expenses[$user->name] = self::where('paid_by', '=', $user->id)->sum('amount');
+            $expenses[$user->name] = 0;
+            $user_expenses = self::where('paid_by', '=', $user->id)->get();
+            foreach ($user_expenses as $expense) {
+                if ($expense->shared == 1) {
+                    $expenses[$user->name] += $expense->amount;
+                } else {
+                    $expenses[$user->name] += ($expense->amount * 2);
+                }
+            }
         }
         unset($user);
 

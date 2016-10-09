@@ -1,7 +1,7 @@
 
 (function() {
     'use strict';
-    resetForm();
+    resetForm('add_expense_form');
 })();
 
 function addExpense() {
@@ -24,30 +24,59 @@ function addExpense() {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(data);
 
-    resetForm();
+    resetForm('add_expense_form');
 
     return false;
 }
 
-function resetForm() {
-    document.querySelector('#add_expense_form').reset();
-    setDate();
+function resetForm(form_name) {
+    var form = document.querySelector('#' + form_name);
+    if (null !== form) {
+        form.reset();
+        setDate();
+    }
 }
 
 function serialize(form_id) {
     let response = '';
-    let inputs = document.querySelectorAll('#' + form_id +' input');
-    inputs.forEach(function(element) {
+    let text_inputs = document.querySelectorAll('#' + form_id +' input[type=text]');
+    text_inputs.forEach(function(element) {
         let name = encodeURI(element.name);
         let value = encodeURI(element.value);
         response += name + '=' + value + '&';
     });
-    let selects = document.querySelectorAll('#' + form_id +' select');
-    selects.forEach(function(element) {
+    let number_inputs = document.querySelectorAll('#' + form_id +' input[type=number]');
+    number_inputs.forEach(function(element) {
         let name = encodeURI(element.name);
         let value = encodeURI(element.value);
         response += name + '=' + value + '&';
     });
+    let date_inputs = document.querySelectorAll('#' + form_id +' input[type=date]');
+    date_inputs.forEach(function(element) {
+        let name = encodeURI(element.name);
+        let value = encodeURI(element.value);
+        response += name + '=' + value + '&';
+    });
+    let check_inputs = document.querySelectorAll('#' + form_id +' input[type=checkbox]:checked');
+    check_inputs.forEach(function(element) {
+        let name = encodeURI(element.name);
+        let value = encodeURI(element.value);
+        response += name + '=' + value + '&';
+    });
+    let select_inputs = document.querySelectorAll('#' + form_id +' select');
+    select_inputs.forEach(function(element) {
+        let name = encodeURI(element.name);
+        let value = encodeURI(element.value);
+        response += name + '=' + value + '&';
+    });
+    let hidden_inputs = document.querySelectorAll('#' + form_id +' input[type=hidden]');
+    hidden_inputs.forEach(function(element) {
+        let name = encodeURI(element.name);
+        let value = encodeURI(element.value);
+        response += name + '=' + value + '&';
+    });
+
+
     return response;
 }
 
@@ -79,7 +108,11 @@ function listExpenses() {
                 let expenses_list = JSON.parse(this.responseText);
                 expenses_list.forEach(function (element) {
                     let date = formatDate(element.date);
-                    html += '<div class="col-xs-12 expense"><div class="col-xs-9">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')</div><div class="col-xs-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
+                    html += '<div class="col-xs-12 expense"><div class="col-xs-9">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')';
+                    if (element.shared == 0) {
+                        html += ' - thief!! -';
+                    }
+                    html += '</div><div class="col-xs-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
                 });
                 document.querySelector('#expenses').innerHTML = html;
             }
