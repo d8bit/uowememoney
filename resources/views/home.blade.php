@@ -31,12 +31,20 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Expenses</div>
+                <div class="panel-heading">Expenses <span id="details">(view details)</span></div>
+                <div id="expenses" class="panel-body hidden"></div>
+            </div>
+        </div>
+    </div>
 
-                <div id="expenses" class="panel-body"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Total</div>
                 <div id="total" class="panel-body"></div>
             </div>
         </div>

@@ -30,11 +30,15 @@ function addExpense() {
 }
 
 function resetForm(form_name) {
-    var form = document.querySelector('#' + form_name);
+    let form = document.querySelector('#' + form_name);
     if (null !== form) {
         form.reset();
         setDate();
     }
+
+    document.querySelector('#details').addEventListener('click', function() {
+        viewExpensesDetails();
+    });
 }
 
 function serialize(form_id) {
@@ -109,7 +113,7 @@ function listExpenses() {
                 expenses_list.forEach(function (element) {
                     let date = formatDate(element.date);
                     html += '<div class="col-xs-12 expense"><div class="col-xs-9">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')';
-                    if (element.shared == 0) {
+                    if (element.shared === 0) {
                         html += ' - thief!! -';
                     }
                     html += '</div><div class="col-xs-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
@@ -132,7 +136,7 @@ function deleteExpense(expense_id) {
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(this.responseText);
                 if ('' !== response.trim()) {
-                    alert(reponse);
+                    alert(response);
                 } else {
                     listExpenses();
                     setTotal();
@@ -179,6 +183,15 @@ function setDate() {
     if (null !== date) {
         date.value = getCurrentDate();
         document.querySelector('#paid_by').value = document.querySelector('#user_id').value;
+    }
+}
+
+function viewExpensesDetails() {
+    let classList = document.querySelector('#expenses').className;
+    if (classList.indexOf('hidden') !== -1) {
+        document.querySelector('#expenses').className = 'panel-body';
+    } else {
+        document.querySelector('#expenses').className = 'panel-body hidden';
     }
 }
 
