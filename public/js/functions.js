@@ -112,8 +112,11 @@ function listExpenses() {
                 let expenses_list = JSON.parse(this.responseText);
                 expenses_list.forEach(function (element) {
                     let date = formatDate(element.date);
+                    let shared = parseInt(element.shared);
+
                     html += '<div class="col-xs-12 expense"><div class="col-xs-9">'+element.name+': '+element.amount+' € ('+element.paid_by.name+' '+date.toLocaleString()+')';
-                    if (element.shared === 0) {
+
+                    if (shared === 0) {
                         html += ' - thief!! -';
                     }
                     html += '</div><div class="col-xs-2 deleteButton" onclick="return deleteExpense('+element.id+')">X</div></div>';
