@@ -29,24 +29,23 @@ class Controller extends BaseController
     public function addExpense()
     {
         $expense = new Expense();
-        $expense->name = \Request::input('name');
+        $expense->name = \Request::input('expenseName');
         $expense->amount = \Request::input('amount');
         $date = \Request::input('date');
         $date = str_replace('/', '-', $date);
         $date = date('Y-m-d', strtotime($date));
         $expense->date = $date;
-        $expense->paid_by = \Request::input('paid_by');
-        $expense->shared = 0;
-        if (\Request::has('shared')) {
-            $expense->shared = 1;
-        }
-        $expense->created_by = \Auth::user()->id;
-        $expense->modified_by = \Auth::user()->id;
+        $expense->paid_by = \Request::input('paidBy');
+        $expense->shared = \Request::input('shared');
+        $expense->created_by = \Request::input('userId');
+        $expense->modified_by = \Request::input('userId');
         try {
             $expense->save();
-            return \Response::json('');
+            $user = User::find($expense->paid_by);
+            $expense->paidBy = $user;
+            return \Response::json(["error" => 0, "content" => $expense]);
         } catch (\Exception $e) {
-            return \Response::json($e->getMessage());
+            return \Response::json(["error" => 1, "content" => $e->getMessage()]);
         }
     }
 
