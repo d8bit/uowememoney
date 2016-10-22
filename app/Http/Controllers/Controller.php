@@ -95,6 +95,13 @@ class Controller extends BaseController
         }
     }
 
+    public function login()
+    {
+        $user = \Request::get('user');
+        $password = \Request::get('password');
+        return \Response::json("{$user}: {$password}");
+    }
+
     public function total()
     {
         $result = Expense::total();
