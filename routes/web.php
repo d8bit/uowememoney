@@ -19,4 +19,5 @@ Route::group(['middleware' => 'api_key'], function () {
     Route::get('/deleteExpense/{id}', 'Controller@deleteExpense');
     Route::get('/total', 'Controller@total');
     Route::post('/addExpense', 'Controller@addExpense');
+    Route::post('/login', 'Controller@login');
 });
