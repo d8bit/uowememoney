@@ -100,7 +100,15 @@ class Controller extends BaseController
         $user = \Request::get('user');
         $password = \Request::get('password');
         if (\Auth::attempt(['email' => $user, 'password' => $password], true)) {
-            return \Response::json(["error" => 0, "message" => \Auth::user()->remember_token]);
+            return \Response::json(
+                [
+                    "error" => 0,
+                    "message" => [
+                        "user" => \Auth::user(),
+                        "token" => \Auth::user()->remember_token
+                    ]
+                ]
+            );
         }
         return \Response::json(["error" => 1, "message" => "Wrong user or password"]);
     }
