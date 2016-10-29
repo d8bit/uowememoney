@@ -1,31 +1,29 @@
 <?php
 
-namespace App\Providers;
+namespace App;
 
-use Laravel\Passport\Passport;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AuthServiceProvider extends ServiceProvider
+class User extends Authenticatable
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
-    protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-    ];
+  use Notifiable;
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->registerPolicies();
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'name', 'email', 'password',
+  ];
 
-        Passport::routes();
-    }
+  /**
+   * The attributes that should be hidden for arrays.
+   *
+   * @var array
+   */
+  protected $hidden = [
+    'password', 'remember_token',
+  ];
 }
