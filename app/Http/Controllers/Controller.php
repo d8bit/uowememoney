@@ -26,6 +26,16 @@ class Controller extends BaseController
     return view('home', $data);
   }
 
+  public function users()
+  {
+    $users = User::all();
+    $response = [
+      "error" => 0,
+      "message" => $users
+    ];
+    return \Response::json($response);
+  }
+
   public function addExpense()
   {
     $expense = new Expense();

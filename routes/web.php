@@ -16,6 +16,7 @@ Auth::routes();
 Route::post('/login', 'Controller@login');
 Route::group(['middleware' => 'api_key'], function () {
     Route::get('/', 'Controller@index');
+    Route::get('/users', 'Controller@users');
     Route::get('/expenses/{id?}', 'Controller@expenses');
     Route::get('/deleteExpense/{id}', 'Controller@deleteExpense');
     Route::get('/total', 'Controller@total');
