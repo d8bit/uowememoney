@@ -12,7 +12,7 @@
                         <label for="name">Expense</label>
                         <input type="text" id="name" name="name" value=""><br />
                         <label for="amount">Amount</label>
-                        <input type="number"  pattern="\d*" step="0.01" id="amount" name="amount" value=""><br />
+                        <input type="number"  pattern="[0-9.]*" step="0.01" id="amount" name="amount" value=""><br />
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date"><br />
                         <label for="paid_by">Paid by</label>
