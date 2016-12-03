@@ -37,10 +37,6 @@ function resetForm(form_name) {
         form.reset();
         setDate();
     }
-
-    document.querySelector('#details').addEventListener('click', function() {
-        viewExpensesDetails();
-    });
 }
 
 function serialize(form_id) {
@@ -215,6 +211,12 @@ function logError(message) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
 }
+
+window.addEventListener('load', function() {
+    document.querySelector('#details').addEventListener('click', function() {
+        viewExpensesDetails();
+    });
+});
 
 
 listExpenses();

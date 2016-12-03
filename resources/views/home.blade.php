@@ -9,20 +9,30 @@
 
                 <div class="panel-body">
                     <form id="add_expense_form" action="http://localhost/uownmemoneyhoney/laravel/public/addExpense" method="post" onsubmit="return addExpense();">
-                        <label for="name">Expense</label>
-                        <input type="text" id="name" name="name" value=""><br />
-                        <label for="amount">Amount</label>
-                        <input type="number"  pattern="[0-9.]*" step="0.01" id="amount" name="amount" value=""><br />
-                        <label for="date">Date</label>
-                        <input type="date" id="date" name="date"><br />
-                        <label for="paid_by">Paid by</label>
-                        <select id="paid_by" name="paid_by">
-                            @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                            @endforeach
-                        </select><br />
-                        <label for="shared">Shared</label>
-                        <input type="checkbox" id="shared" name="shared" checked><br />
+                        <div class="input">
+                            <label for="name">Description</label>
+                            <input type="text" id="name" name="name" value=""><br />
+                        </div>
+                        <div class="input">
+                            <label for="amount">Amount</label>
+                            <input type="number"  step="0.01" id="amount" name="amount" value=""><br />
+                        </div>
+                        <div class="input">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date"><br />
+                        </div>
+                        <div class="input">
+                            <label for="paid_by">Paid by</label>
+                            <select id="paid_by" name="paid_by">
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                            </select><br />
+                        </div>
+                        <div class="input">
+                            <label for="shared">Shared</label>
+                            <input type="checkbox" id="shared" name="shared" checked><br />
+                        </div>
                         {{ csrf_field() }}
                         <input type="hidden" id="user_id" name="user_id" value="{{\Auth::user()->id}}">
                         <input type="submit" value="Add new expense">
