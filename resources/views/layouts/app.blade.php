@@ -13,6 +13,8 @@
     <link href="{{ asset("css/app.css") }}" rel="stylesheet">
     <link href="{{ asset("css/style.css") }}" rel="stylesheet">
 
+    <link href="{{ asset("alertifyjs/css/alertify.min.css") }}" rel="stylesheet">
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -73,5 +75,6 @@
     <!-- Scripts -->
     <script src="{{ asset("js/app.js") }}"></script>
     <script src="{{ asset("js/functions.js") }}"></script>
+    <script src="{{ asset("alertifyjs/alertify.min.js") }}"></script>
 </body>
 </html>

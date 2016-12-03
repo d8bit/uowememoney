@@ -14,9 +14,11 @@ function addExpense() {
             let response = JSON.parse(this.responseText);
             if ('' !== response.trim()) {
                 alert(response);
+                alertify.error('Expense not added');
             } else {
                 listExpenses();
                 setTotal();
+                alertify.success('Expense added');
             }
         }
     };
