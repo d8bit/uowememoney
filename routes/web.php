@@ -19,4 +19,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/deleteExpense/{id}', 'Controller@deleteExpense');
     Route::get('/total', 'Controller@total');
     Route::post('/addExpense', 'Controller@addExpense');
+    Route::get('/log', 'Controller@addLog');
 });

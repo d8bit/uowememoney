@@ -13,7 +13,7 @@ function addExpense() {
         if (this.readyState == 4 && this.status == 200) {
             let response = JSON.parse(this.responseText);
             if ('' !== response.trim()) {
-                alert(response);
+                logError(response);
                 alertify.error('Expense not added');
             } else {
                 listExpenses();
@@ -198,6 +198,22 @@ function viewExpensesDetails() {
     } else {
         document.querySelector('#expenses').className = 'panel-body hidden';
     }
+}
+
+function logError(message) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if ('' !== this.responseText) {
+                console.log(this.responseText);
+            }
+        }
+    };
+
+    let data = '?message=' + encodeURI(message);
+    xhttp.open("GET", "log" + data, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
 }
 
 

@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\User;
 use App\Expense;
 
+use Illuminate\Support\Facades\Log;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -100,6 +102,12 @@ class Controller extends BaseController
     {
         $result = Expense::total();
         return \Response::json($result);
+    }
+
+    public function addLog()
+    {
+        $message = \Request::input('message');
+        Log::error($message);
     }
 
 }
