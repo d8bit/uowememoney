@@ -49,7 +49,7 @@ function serialize(form_id) {
         let value = encodeURI(element.value);
         response += name + '=' + value + '&';
     });
-    let number_inputs = document.querySelectorAll('#' + form_id +' input[type=number]');
+    let number_inputs = document.querySelectorAll('#' + form_id +' input.number');
     number_inputs.forEach(function(element) {
         let name = encodeURI(element.name);
         let value = encodeURI(element.value);
@@ -229,13 +229,26 @@ function inputsAreValid() {
 }
 
 function mask() {
-    document.querySelector('input[type=number]').addEventListener('keypress', function(event) {
+    // Avoid multiple dots
+    document.querySelector('input.number').addEventListener('keydown', function(event) {
+        let value = event.target.value;
+        let code = event.keyCode;
+        if (-1 !== value.indexOf('.') && code === 190) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
+    // Allow only numbers and dots
+    // Using keypress to avoid not valid characters in mobile devices
+    document.querySelector('input.number').addEventListener('keypress', function(event) {
         let code = event.charCode;
         if (isValidKeyCode(code)) {
             return true;
         }
         event.preventDefault();
-    })
+    });
+
 }
 
 function isValidKeyCode(keyCode) {

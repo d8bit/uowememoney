@@ -15,7 +15,7 @@
                         </div>
                         <div class="input">
                             <label for="amount">Amount</label>
-                            <input type="number"  step="0.01" id="amount" name="amount" value=""><br />
+                            <input type="text" class="number"  id="amount" name="amount" value=""><br />
                         </div>
                         <div class="input">
                             <label for="date">Date</label>
