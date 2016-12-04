@@ -212,6 +212,31 @@ function logError(message) {
     xhttp.send();
 }
 
+function mask() {
+    $('input[type=number]').on('keydown', function(event) {
+        let value = event.keyCode;
+        console.log(value);
+        if (isValidKeyCode(value)) {
+            return true;
+        }
+        event.preventDefault();
+    })
+}
+
+function isValidKeyCode(keyCode) {
+    if (8 === keyCode || 190 === keyCode) {
+        return true;
+    }
+    if (isNumber(keyCode)) {
+        return true;
+    }
+    return false;
+}
+
+function isNumber(keyCode) {
+    return (keyCode >= 48 && keyCode <=57);
+}
+
 window.addEventListener('load', function() {
     document.querySelector('#details').addEventListener('click', function() {
         viewExpensesDetails();
@@ -221,3 +246,4 @@ window.addEventListener('load', function() {
 
 listExpenses();
 setTotal();
+mask();
