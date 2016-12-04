@@ -213,9 +213,9 @@ function logError(message) {
 }
 
 function mask() {
-    $('input[type=number]').on('keydown', function(event) {
-        let value = event.keyCode;
-        if (false === event.shiftKey && isValidKeyCode(value)) {
+    $('input[type=number]').on('keypress', function(event) {
+        let code = event.charCode;
+        if (isValidKeyCode(code)) {
             return true;
         }
         event.preventDefault();
@@ -223,7 +223,8 @@ function mask() {
 }
 
 function isValidKeyCode(keyCode) {
-    if (8 === keyCode || 190 === keyCode) {
+    let dotKeyCode = 46;
+    if (dotKeyCode === keyCode) {
         return true;
     }
     if (isNumber(keyCode)) {
