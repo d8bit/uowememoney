@@ -6,8 +6,11 @@
 
 function addExpense() {
 
-    let data = serialize('add_expense_form');
+    if (!inputsAreValid()) {
+        return false;
+    }
 
+    let data = serialize('add_expense_form');
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -209,6 +212,20 @@ function logError(message) {
     xhttp.open("GET", "log" + data, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
+}
+
+function inputsAreValid() {
+    let description = $('#name').val();
+    let amount = $('#amount').val();
+    if ('' === description) {
+        alertify.warning('Add a description');
+        return false;
+    }
+    if ('' === amount) {
+        alertify.warning('Add an amount');
+        return false;
+    }
+    return true;
 }
 
 function mask() {
