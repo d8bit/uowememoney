@@ -215,8 +215,8 @@ function logError(message) {
 }
 
 function inputsAreValid() {
-    let description = $('#name').val();
-    let amount = $('#amount').val();
+    let description = document.querySelector('#name').value;
+    let amount = document.querySelector('#amount').value;
     if ('' === description) {
         alertify.warning('Add a description');
         return false;
@@ -229,7 +229,7 @@ function inputsAreValid() {
 }
 
 function mask() {
-    $('input[type=number]').on('keypress', function(event) {
+    document.querySelector('input[type=number]').addEventListener('keypress', function(event) {
         let code = event.charCode;
         if (isValidKeyCode(code)) {
             return true;
