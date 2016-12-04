@@ -19,14 +19,13 @@ function addExpense() {
                 listExpenses();
                 setTotal();
                 alertify.success('Expense added');
+                resetForm('add_expense_form');
             }
         }
     };
     xhttp.open("POST", "addExpense", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(data);
-
-    resetForm('add_expense_form');
 
     return false;
 }
