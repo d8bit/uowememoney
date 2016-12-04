@@ -215,7 +215,7 @@ function logError(message) {
 function mask() {
     $('input[type=number]').on('keydown', function(event) {
         let value = event.keyCode;
-        if (isValidKeyCode(value)) {
+        if (false === event.shiftKey && isValidKeyCode(value)) {
             return true;
         }
         event.preventDefault();
