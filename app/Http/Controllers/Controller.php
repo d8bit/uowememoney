@@ -80,9 +80,14 @@ class Controller extends BaseController
         // TODO: remove use_id = null
         $user_id = null;
         if (is_null($user_id)) {
-            $expenses = Expense::with('paid_by')->get();
+            $expenses = Expense::with('paid_by')
+                ->orderBy('date', 'desc')
+                ->get();
         } else {
-            $expenses = Expense::where('paid_by', '=', $user_id)->with('paid_by')->get();
+            $expenses = Expense::where('paid_by', '=', $user_id)
+                ->with('paid_by')
+                ->orderBy('date', 'desc')
+                ->get();
         }
         return \Response::json($expenses);
     }
