@@ -98,6 +98,12 @@ class Controller extends BaseController
         }
     }
 
+    public function deleteAllExpenses()
+    {
+        Expense::truncate();
+        return \Response::json('');
+    }
+
     public function total()
     {
         $result = Expense::total();

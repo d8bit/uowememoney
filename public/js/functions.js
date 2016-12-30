@@ -4,6 +4,31 @@
     resetForm('add_expense_form');
 })();
 
+function deleteAllExpenses() {
+
+    var response = confirm("Delete ALL expenses?");
+    if (true === response) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(this.responseText);
+                if ('' !== response.trim()) {
+                    logError(response);
+                    alertify.error('Expense not added');
+                } else {
+                    listExpenses();
+                    setTotal();
+                    alertify.success('Expenses deleted');
+                }
+            }
+        };
+        xhttp.open("GET", "deleteAllExpenses", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send();
+    }
+
+}
+
 function addExpense() {
 
     if (!inputsAreValid()) {
