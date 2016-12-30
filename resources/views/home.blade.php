@@ -35,7 +35,7 @@
                         </div>
                         {{ csrf_field() }}
                         <input type="hidden" id="user_id" name="user_id" value="{{\Auth::user()->id}}">
-                        <input type="submit" value="Add new expense">
+                        <input class="btn-primary" type="submit" value="Add new expense">
                     </form>
                 </div>
             </div>
@@ -62,7 +62,7 @@
 
     <div class="row">
         <div class="col-xs-12 margin-bottom">
-            <button onclick="deleteAllExpenses()">
+            <button class="btn-danger" onclick="deleteAllExpenses()">
                 Delete all expenses
             </button>
         </div>
