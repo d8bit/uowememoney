@@ -36,3 +36,7 @@ select {
 div.input {
     margin-top: 15px;
 }
+
+.margin-bottom {
+    margin-bottom: 20px;
+}
