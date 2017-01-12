@@ -41,4 +41,14 @@ class ExampleTest extends TestCase
             ->see('Add expense');
 
     }
+
+    public function addExpense()
+    {
+        use DatabaseTransactions;
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->visit('/addExpense')
+            ->see('');
+    }
 }
