@@ -8,7 +8,7 @@ use App\User;
 
 class Expense extends Model
 {
-    public function paid_by()
+    public function paidBy()
     {
         return $this->hasOne('App\User', 'id', 'paid_by');
     }
@@ -49,8 +49,6 @@ class Expense extends Model
             }
         }
         unset($user, $amount);
-        // $keys = array_keys($expenses);
-        // $index = array_search($user_with_more_expenses, $keys);
         $debt = abs($total_amount/2);
 
         return [
@@ -59,5 +57,4 @@ class Expense extends Model
         ];
 
     }
-
 }
