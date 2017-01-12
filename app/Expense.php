@@ -15,21 +15,7 @@ class Expense extends Model
 
     public static function total()
     {
-        $users = User::all();
-        $expenses = [];
-        foreach ($users as $user) {
-            // $expenses[$user->name] = self::where('paid_by', '=', $user->id)->sum('amount');
-            $expenses[$user->name] = 0;
-            $user_expenses = self::where('paid_by', '=', $user->id)->get();
-            foreach ($user_expenses as $expense) {
-                if ($expense->shared == 1) {
-                    $expenses[$user->name] += $expense->amount;
-                } else {
-                    $expenses[$user->name] += ($expense->amount * 2);
-                }
-            }
-        }
-        unset($user);
+        $expenses = self::getExpensesByUser();
 
         $user_with_more_expenses = "";
         $user_with_less_expenses = "";
@@ -55,6 +41,23 @@ class Expense extends Model
             "user" => $user_with_less_expenses,
             "amount" => $debt
         ];
+    }
 
+    private static function getExpensesByUser()
+    {
+        $users = User::all();
+        $expenses = [];
+        foreach ($users as $user) {
+            $expenses[$user->name] = 0;
+            $user_expenses = self::where('paid_by', '=', $user->id)->get();
+            foreach ($user_expenses as $expense) {
+                if ($expense->shared == 1) {
+                    $expenses[$user->name] += $expense->amount;
+                } else {
+                    $expenses[$user->name] += ($expense->amount * 2);
+                }
+            }
+        }
+        unset($user);
     }
 }
