@@ -120,5 +120,4 @@ class Controller extends BaseController
         $message = \Request::input('message');
         Log::error($message);
     }
-
 }
