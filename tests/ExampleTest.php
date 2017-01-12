@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ExampleTest extends TestCase
 {
 
+    use DatabaseTransactions;
+
     /**
      * @test
      */
@@ -42,13 +44,31 @@ class ExampleTest extends TestCase
 
     }
 
+    public function listExpense()
+    {
+        $user_id = 1;
+        $user = App\User::find($user_id);
+        $this->actingAs($user)
+            ->get('expenses/'.$user_id)
+            ->see($user->email);
+    }
+
+    /**
+     * @test
+     */
     public function addExpense()
     {
-        use DatabaseTransactions;
-        $user = factory(App\User::class)->create();
+        $user = App\User::find(1);
+        $data = [
+            'name' => 'Sally',
+            'amount' => '20',
+            'date' => '2017-01-01 00:00',
+            'paid_by' => '1'
+        ];
+
         $this->actingAs($user)
-            ->withSession(['foo' => 'bar'])
-            ->visit('/addExpense')
+            ->post('addExpense', $data)
             ->see('');
+
     }
 }

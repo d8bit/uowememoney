@@ -37,7 +37,7 @@ class Controller extends BaseController
         $date = str_replace('/', '-', $date);
         $date = date('Y-m-d', strtotime($date));
         $expense->date = $date;
-        $expense->paidBy = \Request::input('paid_by');
+        $expense->paid_by = \Request::input('paid_by');
         $expense->shared = 0;
         if (\Request::has('shared')) {
             $expense->shared = 1;
@@ -65,7 +65,7 @@ class Controller extends BaseController
         $date = str_replace('/', '-', $date);
         $date = date('Y-m-d', strtotime($date));
         $expense->date = $date;
-        $expense->paidBy = \Request::input('paid_by');
+        $expense->paid_by = \Request::input('paid_by');
         $expense->modified_by = \Auth::user()->id;
         try {
             $expense->save();
@@ -80,7 +80,7 @@ class Controller extends BaseController
         // TODO: remove use_id = null
         $user_id = null;
         if (is_null($user_id)) {
-            $expenses = Expense::with('paid_by')
+            $expenses = Expense::with('paidBy')
                 ->orderBy('date', 'desc')
                 ->get();
         } else {
