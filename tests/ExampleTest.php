@@ -6,13 +6,39 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
+
     /**
-     * A basic functional test example.
-     *
-     * @return void
+     * @test
      */
-    public function testBasicExample()
+    public function viewLogin()
     {
-        $this->assertEquals(1,1);
+        $this->visit('/login')
+             ->see('Login');
+    }
+
+    /**
+     * @test
+     */
+    public function checkLogin()
+    {
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->visit('/')
+            ->see('Add expense');
+
+    }
+
+    /**
+     * @test
+     */
+    public function checkRedirect()
+    {
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->visit('/login')
+            ->see('Add expense');
+
     }
 }
