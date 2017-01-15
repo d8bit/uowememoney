@@ -79,7 +79,6 @@
                 </source>
                 -->
 
-
                 <!-- enrichment source -->
                 <source type="checkstyle">
                     <!-- @type &#45; the handler for the enrichment -->
