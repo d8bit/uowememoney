@@ -26,6 +26,7 @@ class Expense extends Model
      */
     public function paidBy()
     {
+        $mess = "";
         return $this->hasOne('App\User', 'id', 'paid_by');
     }
 
