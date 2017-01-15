@@ -2,8 +2,56 @@
 <phpdox xmlns="http://xml.phpdox.net/config">
   <project name="UOwnMeMoney" source="${basedir}/app" workdir="${basedir}/build/api/xml">
     <collector backend="parser" />
-    <generator output="${basedir}/build/api">
-      <build engine="html" output="html"/>
-    </generator>
-  </project>
-</phpdox>
+
+    <enrich base="${basedir}/build">
+        <!-- @base - (Base-)Directory of datafiles used for enrich process -->
+
+        <!--<source type="...">-->
+            <!-- @type - the handler for the enrichment -->
+            <!--         known types by default are: build, checkstyle, git, phpcs, phploc, phpunit, pmd -->
+
+            <!-- every enrichment source can have additional configuration nodes, most probably need a logfile -->
+            <!-- <file name="path/to/log.xml" /> -->
+            <!--</source> -->
+
+        <!-- add phploc output -->
+            <source type="phploc" />
+                    <file name="build/logs/phploc.xml" />
+                </source>
+
+                <!-- git vcs information -->
+                <!--
+                <source type="git">
+                    <git binary="/usr/bin/git" />
+                    <history enabled="true" limit="15" cache="${phpDox.project.workdir}/gitlog.xml" />
+                </source>
+                -->
+
+                <!-- PHP Code Sniffer findings -->
+                <source type="phpcs">
+                    <file name="build/logs/phpcs.xml" />
+                </source>
+
+                <!-- PHPMessDetector -->
+                <source type="pmd">
+                    <file name="build/logs/pmd.xml" />
+                </source>
+
+                <!-- PHPUnit Coverage XML -->
+                <!-- <source type="phpunit">  -->
+                    <!-- <coverage path="" /> -->
+                    <!--           @path - the directory where the xml code coverage report can be found -->
+                    <!--</source>-->
+                <!--
+                <source type="phpunit">
+                    <filter directory="${phpDox.project.source}" />
+                </source>
+                -->
+
+            </enrich>
+
+            <generator output="${basedir}/build/api">
+                <build engine="html" output="html"/>
+            </generator>
+        </project>
+    </phpdox>
