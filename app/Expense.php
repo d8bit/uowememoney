@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 
+/**
+ * Expense
+ *
+ * @uses Model
+ * @package
+ * @version $id$
+ * @copyright 2016
+ * @author D8bit <shukyto@gmail.com>
+ * @license MIT {@link https://opensource.org/licenses/MIT}
+ */
 class Expense extends Model
 {
     public function paidBy()
