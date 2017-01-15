@@ -46,7 +46,10 @@ class ExampleTest extends TestCase
 
     }
 
-    public function listExpense()
+    /**
+     * @test
+     */
+    public function listExpensesController()
     {
         $user_id = 1;
         $user = App\User::find($user_id);
@@ -58,7 +61,7 @@ class ExampleTest extends TestCase
     /**
      * @test
      */
-    public function addExpense()
+    public function addExpenseController()
     {
         $user = App\User::find(1);
         $data = [
@@ -73,4 +76,14 @@ class ExampleTest extends TestCase
             ->see('');
 
     }
+
+    public function listExpenses()
+    {
+        $user_id = 1;
+        $user = App\User::find($user_id);
+        $expense = new Expense();
+        $expense->getExpenseByUser();
+        $this->assertEquals(1, 1);
+    }
+
 }
