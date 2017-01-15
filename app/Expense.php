@@ -13,11 +13,17 @@ use App\User;
  * @package
  * @version $id$
  * @copyright 2016
- * @author D8bit <shukyto@gmail.com>
+ * @author D8bit <deibit@protonmail.com>
  * @license MIT {@link https://opensource.org/licenses/MIT}
  */
 class Expense extends Model
 {
+    /**
+     * Sets relation between payments and users
+     *
+     * @access public
+     * @return void
+     */
     public function paidBy()
     {
         return $this->hasOne('App\User', 'id', 'paid_by');
@@ -25,7 +31,7 @@ class Expense extends Model
 
 
     /**
-     * total - Calculate total expenses
+     * Calculate total expenses
      *
      * Sets who owns money to who, and the amount
      *
@@ -63,6 +69,13 @@ class Expense extends Model
         ];
     }
 
+    /**
+     * Gets the amount of the expenses for each user
+     *
+     * @static
+     * @access private
+     * @return void
+     */
     private static function getExpensesByUser()
     {
         $users = User::all();
