@@ -12,6 +12,16 @@ use App\Expense;
 
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Main controller
+ *
+ * @uses BaseController
+ * @package
+ * @version $id$
+ * @copyright 2016
+ * @author D8bit Ketepires <deibit@protonmail.com>
+ * @license MIT {@link https://opensource.org/licenses/MIT}
+ */
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -28,6 +38,12 @@ class Controller extends BaseController
         return view('home', $data);
     }
 
+    /**
+     * Adds a new expense for the given user
+     *
+     * @access public
+     * @return json
+     */
     public function addExpense()
     {
         $expense = new Expense();
@@ -52,6 +68,13 @@ class Controller extends BaseController
         }
     }
 
+    /**
+     * Not used at the moment
+     *
+     * @param mixed $expense_id
+     * @access public
+     * @return json
+     */
     public function editExpense($expense_id)
     {
         try {
@@ -75,6 +98,13 @@ class Controller extends BaseController
         }
     }
 
+    /**
+     * List the expenses from a user
+     *
+     * @param int $user_id
+     * @access public
+     * @return json
+     */
     public function expenses($user_id = null)
     {
         // TODO: remove use_id = null
@@ -92,6 +122,13 @@ class Controller extends BaseController
         return \Response::json($expenses);
     }
 
+    /**
+     * Delete an expense
+     *
+     * @param int $expense_id
+     * @access public
+     * @return json
+     */
     public function deleteExpense($expense_id)
     {
         try {
@@ -103,18 +140,36 @@ class Controller extends BaseController
         }
     }
 
+    /**
+     * Delete all expenses
+     *
+     * @access public
+     * @return json
+     */
     public function deleteAllExpenses()
     {
         Expense::truncate();
         return \Response::json('');
     }
 
+    /**
+     * Get the total amount
+     *
+     * @access public
+     * @return void
+     */
     public function total()
     {
         $result = Expense::total();
         return \Response::json($result);
     }
 
+    /**
+     * Adds a message to Larvel's log
+     *
+     * @access public
+     * @return void
+     */
     public function addLog()
     {
         $message = \Request::input('message');
