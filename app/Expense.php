@@ -13,6 +13,16 @@ class Expense extends Model
         return $this->hasOne('App\User', 'id', 'paid_by');
     }
 
+
+    /**
+     * total - Calculate total expenses
+     *
+     * Sets who owns money to who, and the amount
+     *
+     * @static
+     * @access public
+     * @return array
+     */
     public static function total()
     {
         $expenses = self::getExpensesByUser();
