@@ -1,3 +1,3 @@
 # YouOwnMeMoneyHoney
 
-App to manage couple expenses. Developing.
+App to manage couple expenses. Beta version.
