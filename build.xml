@@ -105,9 +105,9 @@
      <exec executable="${phploc}" taskname="phploc">
          <arg value="--count-tests" />
          <arg value="--log-csv" />
-         <arg path="${basedir}phploc.csv" />
+         <arg path="${basedir}/build/logs/phploc.csv" />
          <arg value="--log-xml" />
-         <arg path="${basedir}phploc.xml" />
+         <arg path="${basedir}/build/logs/phploc.xml" />
          <arg path="....." />
      </exec>
      <property name="phploc.done" value="true"/>
@@ -258,7 +258,7 @@
    unless="phpdox.done"
    depends="phploc-ci,phpcs-ci,phpmd-ci"
    description="Generate project documentation using phpDox">
-   <exec executable="${phpdox}" dir="${basedir}" taskname="phpdox"/>
+   <exec executable="${phpdox}" dir="${basedir}/build/logs" taskname="phpdox"/>
 
    <property name="phpdox.done" value="true"/>
  </target>
