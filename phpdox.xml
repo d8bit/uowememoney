@@ -117,6 +117,7 @@
                 <template dir="${phpDox.home}/templates/html" />
                 <file extension="xhtml" />
             </build>
+            <!--  end default engine "html" -->
 
         </generator>
     </project>
