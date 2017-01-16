@@ -60,7 +60,7 @@
 
             <!-- A generation process consists of one or more build tasks and of (optional) enrich sources -->
 
-            <enrich base="${basedir}/build">
+            <enrich base="${basedir}/build/logs">
                 <!-- @base - (Base-)Directory of datafiles used for enrich process -->
 
                 <!-- add build information - this should always be enabled -->
@@ -68,7 +68,7 @@
 
                 <!-- add phploc output -->
                 <source type="phploc">
-                    <file name="logs/phploc.xml" />
+                    <file name="phploc.xml" />
                 </source>
 
                 <!-- add git vcs information -->
@@ -84,7 +84,7 @@
                     <!-- @type &#45; the handler for the enrichment -->
                     <!--         known types by default are: checkstyle, pmd, clover, phpunit -->
                     <!-- every enrichment source can have additional configuration nodes, most probably need a logfile -->
-                    <file name="logs/checkstyle.xml" />
+                    <file name="checkstyle.xml" />
                 </source>
 
                 <!-- enrichment source -->
