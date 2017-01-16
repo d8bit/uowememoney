@@ -67,7 +67,9 @@
                         <source type="build" />
 
                         <!-- add phploc output -->
-                        <source type="phploc" />
+                        <source type="phploc">
+                            <file name="logs/phplox.xml" />
+                        </source>
 
                         <!-- add git vcs information -->
                         <!--
@@ -113,7 +115,7 @@
             <!-- An engine and thus build node can have additional configuration child nodes, please check the documentation for the engine to find out more -->
 
             <!--  default engine "html" -->
-            <build engine="html" enabled="true" output="${basedir}/api/html">
+            <build engine="html" enabled="true" output="${basedir}/api">
                 <template dir="${phpDox.home}/templates/html" />
                 <file extension="xhtml" />
             </build>
