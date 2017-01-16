@@ -93,5 +93,6 @@ class Expense extends Model
             }
         }
         unset($user);
+        return $expenses;
     }
 }
