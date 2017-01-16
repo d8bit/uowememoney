@@ -9,7 +9,7 @@
     <bootstrap />
 
     <!-- A phpDox project to process, you can have multiple projects in one config file -->
-    <project name="phpdox" source="${basedir}/app" workdir="${basedir}/build/phpdox/xml">
+    <project name="phpdox" source="${basedir}/app" workdir="${basedir}/build/api/xml">
         <!--  @name    - The name of the project -->
         <!--  @source  - The source directory of the application to process -->
         <!--  @workdir - The directory to store the xml data files in -->
@@ -113,7 +113,7 @@
             <!-- An engine and thus build node can have additional configuration child nodes, please check the documentation for the engine to find out more -->
 
             <!--  default engine "html" -->
-            <build engine="html" enabled="true" output="${basedir}/build/api/html">
+            <build engine="html" enabled="true" output="${basedir}/build/api">
                 <template dir="${phpDox.home}/templates/html" />
                 <file extension="xhtml" />
             </build>
